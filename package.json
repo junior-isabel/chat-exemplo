@@ -1,0 +1,32 @@
+{
+  "name": "chat-example",
+  "version": "1.0.0",
+  "description": "chat com socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junior-isabel/chat-exemplo.git"
+  },
+  "keywords": [
+    "chat",
+    "messge",
+    "communication"
+  ],
+  "author": "jose chicapue junior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/junior-isabel/chat-exemplo/issues"
+  },
+  "homepage": "https://github.com/junior-isabel/chat-exemplo#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}

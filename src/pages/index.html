@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socket.IO chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 13px Helvetica, Arial;
+        }
+
+        #form {
+            background: #000;
+            padding: 3px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        form input {
+            border: 0;
+            padding: 10px;
+            width: 90%;
+            margin-right: 0.5%;
+        }
+
+        #form button {
+            width: 9%;
+            background: rgb(130, 224, 255);
+            border: none;
+            padding: 10px;
+        }
+
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #messages li {
+            padding: 5px 10px;
+        }
+
+        #messages li:nth-child(odd) {
+            background: #eee;
+        }
+        #login {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        #login input {
+            
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="messages"></ul>
+    <form action="" id="login">
+        <input id="m" autocomplete="off" name="login"/><button>login</button>
+    </form>
+    <form action="" id="form">
+        <input id="m" autocomplete="off" name="message"/><button>Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        document.querySelector('#form').addEventListener('submit', (event) => {
+            event.preventDefault()
+            const message = event.target.message.value
+            socket.emit('message chat', message)
+            event.target.message.value = ''
+            return false
+        })
+
+        socket.on('user connected', (data) => {
+            console.log(data)
+        })
+        socket.on('message chat', (msg) => {
+            console.log(msg)
+            let message = document.createElement('li')
+            message.innerText = msg
+            document.querySelector('#messages').appendChild(message)
+        })
+
+    </script>
+</body>
+
+</html>
