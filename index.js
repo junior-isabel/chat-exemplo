@@ -16,6 +16,10 @@ io.on("connection", (socket) => {
   socket.on('message chat', (msg) => {
     io.emit('message chat', msg)
   })
+  socket.on('nickname', (data) => {
+    users.push(data)
+    io.emit('new user', users)
+  })
 })
 
 server.listen(3000, () => {
