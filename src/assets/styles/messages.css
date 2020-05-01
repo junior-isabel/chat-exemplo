@@ -1,0 +1,9 @@
+.list-messages li {
+    display: flex;
+    align-items: center;
+}
+.list-messages li .user-description {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}

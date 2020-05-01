@@ -3,166 +3,122 @@
 
 <head>
   <title>Socket.IO chat</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <link href="/styles/index.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/pages.css">
+  <link rel="stylesheet" href="/styles/forms.css">
+  <link rel="stylesheet" href="/styles/messages.css">
 
-    body {
-      font: 13px Helvetica, Arial;
-    }
-
-    #form {
-      background: #000;
-      padding: 3px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-
-    form input {
-      border: 0;
-      padding: 10px;
-      width: 90%;
-      margin-right: 0.5%;
-    }
-
-    #form button {
-      width: 9%;
-      background: rgb(130, 224, 255);
-      border: none;
-      padding: 10px;
-    }
-
-    #messages {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    #messages li {
-      padding: 5px 10px;
-    }
-
-    #messages li:nth-child(odd) {
-      background: #eee;
-    }
-
-    #login {
-      position: fixed;
-      width: 600px;
-      height: 250px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-    }
-    .hide {
-      display: none;
-    }
-    #login label {
-      font-family: monospace;
-      font-size: 18px;
-      font-weight: bold;
-      color: #444;
-      margin-bottom: 8px;
-      border-bottom: .5px solid #000;
-      padding-bottom: 8px;
-      display: flex;
-      align-items: center;
-    }
-
-    #login input {
-      min-width: 400px;
-      border-style: none;
-      color: #983ca8;
-      outline-style: none;
-      font-size: 20px;
-    }
-
-    #login button:hover {
-      background: #983ca8;
-      color: #fff;
-    }
-
-    #login button {
-      width: 200px;
-      text-align: center;
-      outline-style: none;
-      border-style: none;
-      padding: 12px 6px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .badge {
-      display: inline-block;
-      position: fixed;
-      right: 20px;
-      top: 15px;
-      padding: 10px;
-      border-radius: 100%;
-      border: 1px solid #ccc;
-      font-size: 18px;
-      line-height: 20px;
-      color: rgba(235, 244, 252, 0.897);
-      background: rgb(3, 163, 102);
-    }
-  </style>
 </head>
 
 <body>
-  <span class="badge" id="badge"></span>
-  <ul id="messages"></ul>
-  <form action="" id="login">
-    <label for="nickname">Nickname:
-      <input id="nickname" autocomplete="off" name="nickname" />
-    </label>
-    <button>login</button>
-  </form>
-  <form action="" id="form">
-    <input id="m" autocomplete="off" name="message" /><button>Send</button>
-  </form>
-
+  <div class="page center active-page" data-component="home-page">
+    <div class="apply-navbar"></div>
+  </div>
+  <div class="page login row" data-component="login">
+    <div class="apply-navbar"></div>
+    <form action="" class="form-login">
+      <label for="" class="input-control">Usuário#
+        <input type="text" placeholder="nome de usuário">
+      </label>
+      <button type="submit">login</button>
+    </form>
+  </div>
+  <div class="page" data-component="chat">
+    <div class="apply-navbar"></div>
+  </div>
+  <div class="page" data-component="profile">
+    <div class="apply-navbar"></div>
+  </div>
+  <div class="page" data-component="messages">
+    <div class="apply-navbar"></div>
+    <ul class="list-messages">
+      <li>
+        <img class="user-thumbnail" src="/images/teamember.png" width="80" height="80" alt="">
+        <div class="user-description">
+          <label for="">my name is: </label>
+          <label for="">Id: </label>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="page" data-component="about">
+    <div class="apply-navbar"></div>
+  </div>
+  <template id="app-navbar">
+    <nav class="navbar">
+      <span class="btn-login" data-route-link="/login">log in</span>
+      <ul class="menu">
+        <li data-route-link="/home-page">Início</li>
+        <li data-route-link="/chat">Chat</li>
+        <li data-route-link="/messages">Mensagens</li>
+        <li data-route-link="/profile">perfil</li>
+        <li data-route-link="/about">sobre</li>
+      </ul>
+    </nav>
+  </template>
+  <!--
+    <h3 id="nickname"></h3>
+    <span class="badge" id="badge"></span>
+    <ul id="messages"></ul>
+    <form action="" id="form-login">
+      <label for="nickname">Nickname:
+        <input id="nickname" autocomplete="off" name="nickname" />
+      </label>
+      <button>login</button>
+    </form>
+    <form action="" id="form-message">
+      <input id="m" autocomplete="off" name="message" /><button>Send</button>
+    </form>
+  -->
+  
+  <script src="/js/components.js"></script>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/controllerChat.js"></script>
+  <script src="/js/formMessage.js"></script>
+  <script src="/js/userController.js"></script>
+  <script src="/js/formLogin.js"></script>
+  <script src="/js/routes.js"></script>
   <script>
     var socket = io();
     var nickname = null
-    document.querySelector('#login').addEventListener('submit', (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      let value = e.target.nickname.value
-      socket.emit('nickname', {
-        nickname: value
+  /*  document.querySelector('#login').addEventListener('submit', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        let value = e.target.nickname.value
+        socket.emit('nickname', {
+          nickname: value
+        })
       })
-    })
-    document.querySelector('#form').addEventListener('submit', (event) => {
-      event.preventDefault()
-      const message = event.target.message.value
-      socket.emit('message chat', {message, nickname})
-      event.target.message.value = ''
-      return false
-    })
-
-    socket.on('user connected', (data) => {
-      console.log(data)
-    })
-    socket.on('message chat', (msg) => {
-      console.log(msg)
-      let message = document.createElement('li')
-      message.innerText = msg
-      document.querySelector('#messages').appendChild(message)
-    })
-
-    socket.on('new user', (data) => {
-      console.log(data)
-      document.querySelector('#badge').innerText = data.length - 1
-    })
+      document.querySelector('#form').addEventListener('submit', (event) => {
+        event.preventDefault()
+        const message = event.target.message.value
+        socket.emit('message chat', {message, nickname})
+        event.target.message.value = ''
+        return false
+      })
+  
+      socket.on('user connected', (data) => {
+        console.log(data)
+      })
+      socket.on('message chat', (msg) => {
+        console.log(msg)
+        let message = document.createElement('li')
+        message.innerText = msg
+        document.querySelector('#messages').appendChild(message)
+      })
+  
+      socket.on('new user', (data) => {
+        console.log(data)
+        document.querySelector('#badge').innerText = data.length - 1
+      })
+      */
   </script>
+
+  <script>
+    channel(socket)
+    OnlineUser(socket)
+  </script>
+
 </body>
 
 </html>

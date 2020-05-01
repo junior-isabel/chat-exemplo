@@ -1,0 +1,38 @@
+.form-login {
+    flex: 40%;
+    max-width: 40%;
+}
+.form-login .input-control {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #888;
+    flex-wrap: nowrap;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 10px 0;
+}
+.input-control input {
+    border-style: none;
+    outline-style: none;
+    flex: 1;
+    font-size: 28px;
+    font-weight: lighter;
+    caret-color: chartreuse;    
+}
+.input-control input::placeholder {
+    text-transform: capitalize;
+}
+.form-login [type="submit"] {
+    min-width: 220px;
+    min-height: 40px;
+    background-color: rgb(20, 177, 6);
+    color: #fafafa;
+    outline-style: none;
+    border-style: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+.form-login [type="submit"]:hover {
+    background-color: rgb(32, 223, 14);
+}

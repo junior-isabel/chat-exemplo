@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+[data-route-link] {
+  cursor: pointer;
+}
+[data-route-link]:hover {
+  color: rgb(29, 82, 255);
+}
+body {
+  font: 13px Helvetica, Arial;
+  font-size: 18px;
+}
+
+#form-message {
+  background: #000;
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+form input {
+  border: 0;
+  padding: 10px;
+  width: 90%;
+  margin-right: 0.5%;
+}
+
+#form-message button {
+  width: 9%;
+  background: rgb(130, 224, 255);
+  border: none;
+  padding: 10px;
+}
+
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#messages li {
+  padding: 5px 10px;
+}
+
+#messages li:nth-child(odd) {
+  background: #eee;
+}
+
+#form-login {
+  position: fixed;
+  width: 600px;
+  height: 250px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.hide {
+  display: none;
+}
+#form-login label {
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 8px;
+  border-bottom: .5px solid #000;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+#form-login input {
+  min-width: 400px;
+  border-style: none;
+  color: #983ca8;
+  outline-style: none;
+  font-size: 20px;
+}
+
+#form-login button:hover {
+  background: #983ca8;
+  color: #fff;
+}
+
+#form-login button {
+  width: 200px;
+  text-align: center;
+  outline-style: none;
+  border-style: none;
+  padding: 12px 6px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.badge {
+  display: inline-block;
+  position: fixed;
+  right: 20px;
+  top: 15px;
+  padding: 10px;
+  border-radius: 100%;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  line-height: 20px;
+  color: rgba(235, 244, 252, 0.897);
+  background: rgb(3, 163, 102);
+}

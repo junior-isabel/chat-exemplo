@@ -1,0 +1,37 @@
+.page {
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  position: absolute;
+  transform: translateX(-100vw);
+}
+.page.active-page {
+  transform: translateX(0);
+  transition: transform 1s ease 0s;
+}
+.page.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row {
+    flex: 100%;
+}
+ul {
+    list-style: none;
+}
+.page .navbar {
+    flex: 50%;
+    max-width: 50%;
+}
+.page .navbar .menu{
+    display: flex;
+    justify-content: space-around;
+}
+.page .navbar .menu li {
+    padding: 5px 12px;
+    cursor: pointer;
+}
+.page .navbar .menu li:hover {
+    color: rgb(29, 82, 255);
+}
